@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tools:
+    name: Go tools
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: tools/go.mod
+          cache: false
+      - name: Vet and test
+        working-directory: tools
+        run: |
+          go vet ./...
+          go test ./...
+      - name: Validate the catalog
+        working-directory: tools
+        run: go run ./cmd/ldm catalog -root .. -out ../site/data
+
+  site:
+    name: Website
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm test
+      - run: npm run build:css
+
+  languages:
+    name: Language matrix
+    runs-on: ubuntu-latest
+    outputs:
+      ids: ${{ steps.list.outputs.ids }}
+    steps:
+      - uses: actions/checkout@v7
+      - id: list
+        run: echo "ids=$(jq -c '[.[].id]' catalog/languages.json)" >> "$GITHUB_OUTPUT"
+
+  verify:
+    name: Verify ${{ matrix.language }}
+    needs: [tools, languages]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ${{ fromJSON(needs.languages.outputs.ids) }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: tools/go.mod
+          cache: false
+      - name: Build images and run verification cases
+        run: bin/bench.sh -verify-only -lang ${{ matrix.language }}

@@ -1,0 +1,13 @@
+{
+  "notes": [
+    "uint32 generator state: seed * 3877 + 29573 stays below 2^30, so no overflow.",
+    "Linear scan over a cumulative []float64; float64(seed) / im is a plain IEEE division.",
+    "ALU lines are slices of alu + alu[:60], so a line never needs to wrap mid-copy.",
+    "bufio.Writer with a 64 KiB buffer (sticky errors reported by Flush); static binary on a scratch image."
+  ],
+  "files": [
+    { "path": "main.go", "role": "source" },
+    { "path": "go.mod", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

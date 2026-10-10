@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "std::uint32_t generator state: seed * 3877 + 29573 stays below 2^30, so no overflow.",
+    "std::ranges::find_if scans the cumulative probabilities; static_cast<double>(seed) / im is a plain IEEE division.",
+    "Lines are built in a std::array<char, 61> and written with std::cout.write (sync_with_stdio(false)).",
+    "g++ -O2, statically linked and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.cpp", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

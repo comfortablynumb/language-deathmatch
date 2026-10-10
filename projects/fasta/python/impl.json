@@ -1,0 +1,11 @@
+{
+  "notes": [
+    "A generator function keeps the LCG state, so record THREE naturally continues where record TWO stopped.",
+    "itertools.accumulate builds the cumulative table; bisect.bisect_right finds the first entry greater than r.",
+    "One list comprehension per 60-character line, turned into bytes and fed to sys.stdout.buffer.writelines (buffered)."
+  ],
+  "files": [
+    { "path": "main.py", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

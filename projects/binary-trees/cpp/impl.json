@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Every node is its own std::make_unique<Node>; a leaf has two null std::unique_ptr children.",
+    "A dropped tree is destroyed recursively by unique_ptr destructors: one operator delete per node (glibc malloc, static).",
+    "std::from_chars parses without locale or exceptions; digits are validated first.",
+    "g++ -O2, statically linked and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.cpp", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

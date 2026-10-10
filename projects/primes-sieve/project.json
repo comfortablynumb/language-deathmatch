@@ -1,0 +1,55 @@
+{
+  "name": "Primes Sieve",
+  "summary": "Count and sum the primes up to N and find the largest one, with the Sieve of Eratosthenes.",
+  "category": "algorithms",
+  "level": 2,
+  "kind": "cli",
+  "tags": ["cpu-bound", "memory", "loops", "integer-arithmetic"],
+  "spec": {
+    "description": "The Sieve of Eratosthenes over one byte per integer. Crossing off multiples is a stream of strided writes over a large array and the final scan reads it sequentially, so this measures tight loops, bounds checks and memory bandwidth.",
+    "input": "Exactly one argument N made only of ASCII digits (leading zeros allowed), with 0 ≤ N ≤ 200000000.",
+    "output": "Three lines: count: C, sum: S and largest: P (each followed by \\n), where C is the number of primes ≤ N, S their sum (unsigned 64-bit, fits for the allowed range) and P the largest prime ≤ N (0 when there is none). Exit code 0.",
+    "rules": [
+      "One byte (or bool) flag per integer 0..N: no bit packing, no odd-only layout, no wheel, no segmentation.",
+      "For p = 2, 3, … while p × p ≤ N: if p is still marked prime, cross off p × p, p × p + p, … ≤ N. Then scan the flags to count, sum and find the largest prime.",
+      "Python may cross off with slice assignment and scan with itertools.compress (the idiomatic built-ins for the same algorithm).",
+      "Missing or extra arguments, non-digit characters or N > 200000000: usage message on stderr, nothing on stdout, exit code 1.",
+      "Output must be buffered."
+    ]
+  },
+  "verify": [
+    { "name": "zero", "args": ["0"], "exitCode": 0, "stdout": "count: 0\nsum: 0\nlargest: 0\n" },
+    { "name": "one", "args": ["1"], "exitCode": 0, "stdout": "count: 0\nsum: 0\nlargest: 0\n" },
+    { "name": "two", "args": ["2"], "exitCode": 0, "stdout": "count: 1\nsum: 2\nlargest: 2\n" },
+    { "name": "ten", "args": ["10"], "exitCode": 0, "stdout": "count: 4\nsum: 17\nlargest: 7\n" },
+    { "name": "one hundred", "args": ["100"], "exitCode": 0, "stdout": "count: 25\nsum: 1060\nlargest: 97\n" },
+    { "name": "one million", "args": ["1000000"], "exitCode": 0, "stdout": "count: 78498\nsum: 37550402023\nlargest: 999983\n" },
+    { "name": "leading zeros", "args": ["0010"], "exitCode": 0, "stdout": "count: 4\nsum: 17\nlargest: 7\n" },
+    { "name": "missing argument", "args": [], "exitCode": 1, "stdout": "" },
+    { "name": "too many arguments", "args": ["5", "5"], "exitCode": 1, "stdout": "" },
+    { "name": "not a number", "args": ["abc"], "exitCode": 1, "stdout": "" },
+    { "name": "negative", "args": ["-5"], "exitCode": 1, "stdout": "" },
+    { "name": "plus sign", "args": ["+5"], "exitCode": 1, "stdout": "" },
+    { "name": "too large", "args": ["200000001"], "exitCode": 1, "stdout": "" }
+  ],
+  "benchmarks": [
+    {
+      "id": "1m",
+      "name": "1 million",
+      "description": "N = 1,000,000: a 1 MB flag array that fits in cache, so startup and loop overhead dominate.",
+      "args": ["1000000"],
+      "warmup": 3,
+      "runs": 20,
+      "sha256": "cf60ec8d228e72067182745c176ef8508b3328132610eed0a1baf2d7afa0cb0e"
+    },
+    {
+      "id": "100m",
+      "name": "100 million",
+      "description": "N = 100,000,000: a 100 MB flag array far larger than any cache; strided writes and the final scan are bound by memory bandwidth.",
+      "args": ["100000000"],
+      "warmup": 1,
+      "runs": 10,
+      "sha256": "54f79bcbd2c803ac6b202f5f6d180a74ac454ba8f678940285a1484fc718c6fc"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "bytearray holds one byte per flag; slice assignment (is_prime[p*p::p] = bytes(k)) crosses off multiples in C.",
+    "itertools.compress(range(n + 1), is_prime) yields only the primes, so the Python-level loop runs once per prime.",
+    "Python integers are unbounded, so the sum needs no 64-bit handling.",
+    "isascii() + isdigit() rejects signs, spaces and non-ASCII digits such as '²'."
+  ],
+  "files": [
+    { "path": "main.py", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

@@ -1,0 +1,7 @@
+[
+  { "level": 1, "name": "Trivial", "description": "One function, a loop, stdout. Highlights startup cost and basic I/O." },
+  { "level": 2, "name": "Easy", "description": "Standard collections, input parsing and simple algorithms." },
+  { "level": 3, "name": "Medium", "description": "Non-trivial algorithms, recursion, memory-heavy work and file formats." },
+  { "level": 4, "name": "Hard", "description": "Concurrency, networking, long-running servers, frameworks or protocols." },
+  { "level": 5, "name": "Expert", "description": "Multi-service systems with external dependencies, interpreters or engines." }
+]

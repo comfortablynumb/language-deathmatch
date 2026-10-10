@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "[]bool uses one byte per flag; make zero-fills it, so only 2..N are set to true.",
+    "Plain int indices (64-bit on amd64): p*p and m += p cannot overflow for N ≤ 200000000.",
+    "The three results are written once through a bufio.Writer; static binary on a scratch image."
+  ],
+  "files": [
+    { "path": "main.go", "role": "source" },
+    { "path": "go.mod", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

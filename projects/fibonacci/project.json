@@ -1,0 +1,53 @@
+{
+  "name": "Fibonacci",
+  "summary": "Print the first N Fibonacci numbers, one per line, using 64-bit wrapping arithmetic.",
+  "category": "algorithms",
+  "level": 1,
+  "kind": "cli",
+  "tags": ["cpu-bound", "integer-arithmetic", "loops", "stdout", "startup"],
+  "spec": {
+    "description": "The classic warm-up. Small N measures how fast a runtime starts; large N measures integer arithmetic, integer-to-text formatting and buffered output throughput.",
+    "input": "Exactly one argument N made only of ASCII digits (leading zeros allowed), with 0 ≤ N ≤ 1000000000.",
+    "output": "F(0), F(1), …, F(N-1) in decimal, one per line (each followed by \\n), computed with unsigned 64-bit wrapping arithmetic (mod 2^64). Exit code 0.",
+    "rules": [
+      "F(0) = 0, F(1) = 1, F(i) = F(i-1) + F(i-2) modulo 2^64: exact up to F(93) = 12200160415121876738, then wraps.",
+      "Iterative algorithm with two running values: no closed form, no recursion, no lookup tables.",
+      "Missing or extra arguments, non-digit characters or N > 1000000000: usage message on stderr, nothing on stdout, exit code 1.",
+      "Output must be buffered."
+    ]
+  },
+  "verify": [
+    { "name": "first ten", "args": ["10"], "exitCode": 0, "stdout": "0\n1\n1\n2\n3\n5\n8\n13\n21\n34\n" },
+    { "name": "zero", "args": ["0"], "exitCode": 0, "stdout": "" },
+    { "name": "leading zeros", "args": ["007"], "exitCode": 0, "stdout": "0\n1\n1\n2\n3\n5\n8\n" },
+    { "name": "largest exact", "args": ["94"], "exitCode": 0, "sha256": "e6a770316d41a6a4d4e48b1df7baba40b896cdf915faee02ebd04c92389d4cdf" },
+    { "name": "wraps at 2^64", "args": ["100"], "exitCode": 0, "sha256": "521c26b462dfd13a62b2c6047edc543427ff6e911f3235b5735c27d2c9ff0185" },
+    { "name": "one thousand", "args": ["1000"], "exitCode": 0, "sha256": "fedc4a9ecd4bdd016f813fd78b0e5939df4245d04e742150360a13a4d4d5d8a5" },
+    { "name": "missing argument", "args": [], "exitCode": 1, "stdout": "" },
+    { "name": "too many arguments", "args": ["5", "5"], "exitCode": 1, "stdout": "" },
+    { "name": "not a number", "args": ["abc"], "exitCode": 1, "stdout": "" },
+    { "name": "negative", "args": ["-5"], "exitCode": 1, "stdout": "" },
+    { "name": "plus sign", "args": ["+5"], "exitCode": 1, "stdout": "" },
+    { "name": "too large", "args": ["1000000001"], "exitCode": 1, "stdout": "" }
+  ],
+  "benchmarks": [
+    {
+      "id": "startup",
+      "name": "Startup",
+      "description": "N = 10: almost no work, so the time is dominated by process and runtime startup.",
+      "args": ["10"],
+      "warmup": 3,
+      "runs": 30,
+      "sha256": "356f8e5349048d902084bc657340d5c36c8f8bfdd82d587fad79c7933f602ad5"
+    },
+    {
+      "id": "throughput",
+      "name": "Throughput",
+      "description": "N = 2,000,000 (40.8 MB of output): integer arithmetic, number formatting and buffered I/O.",
+      "args": ["2000000"],
+      "warmup": 1,
+      "runs": 10,
+      "sha256": "578b267071b3199df4effa769366ed947b0fd70ae91758476198f63b96bb2abb"
+    }
+  ]
+}

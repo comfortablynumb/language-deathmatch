@@ -1,0 +1,54 @@
+{
+  "name": "Fasta",
+  "summary": "Generate three DNA sequences in FASTA format: a repeated ALU string and two weighted random sequences from a linear congruential generator.",
+  "category": "text-processing",
+  "level": 2,
+  "kind": "cli",
+  "tags": ["strings", "stdout", "floating-point", "io-bound"],
+  "spec": {
+    "description": "The Computer Language Benchmarks Game program, sequential. It cycles through a fixed string, draws weighted random symbols with an integer generator and a double-precision cumulative lookup, and formats everything into 60-character lines: string handling, a little floating point and lots of buffered output.",
+    "input": "Exactly one argument N made only of ASCII digits (leading zeros allowed), with 0 ≤ N ≤ 25000000.",
+    "output": "Three FASTA records, each a header line followed by its sequence wrapped at 60 characters per line (the last line may be shorter, every line ends with \\n, no empty lines): '>ONE Homo sapiens alu' with the 287-character ALU string repeated cyclically for 2N characters; '>TWO IUB ambiguity codes' with 3N random IUB symbols; '>THREE Homo sapiens frequency' with 5N random Homo sapiens symbols. Exit code 0.",
+    "rules": [
+      "One generator for the whole run, seed = 42: each random character does seed = (seed * 3877 + 29573) mod 139968, then r = seed / 139968.0 as an IEEE-754 double division. Record THREE continues from the state record TWO left.",
+      "Cumulative probabilities are the running double sum of the table probabilities in table order (starting from 0.0). Pick the first entry whose cumulative probability is greater than r; if there is none, the last entry.",
+      "IUB table: a 0.27, c 0.12, g 0.12, t 0.27, then B D H K M N R S V W Y at 0.02 each. Homo sapiens table: a 0.3029549426680, c 0.1979883004921, g 0.1975473066391, t 0.3015094502008.",
+      "Exactly one generator step per random character; no tables precomputed per seed value. A linear scan or the standard library's binary search over the cumulative table are both allowed.",
+      "Missing or extra arguments, non-digit characters or N > 25000000: usage message on stderr, nothing on stdout, exit code 1.",
+      "Single-threaded; output must be buffered."
+    ]
+  },
+  "verify": [
+    { "name": "zero", "args": ["0"], "exitCode": 0, "stdout": ">ONE Homo sapiens alu\n>TWO IUB ambiguity codes\n>THREE Homo sapiens frequency\n" },
+    { "name": "one", "args": ["1"], "exitCode": 0, "stdout": ">ONE Homo sapiens alu\nGG\n>TWO IUB ambiguity codes\nctt\n>THREE Homo sapiens frequency\ntgagc\n" },
+    { "name": "ten", "args": ["10"], "exitCode": 0, "stdout": ">ONE Homo sapiens alu\nGGCCGGGCGCGGTGGCTCAC\n>TWO IUB ambiguity codes\ncttBtatcatatgctaKggNcataaaSatg\n>THREE Homo sapiens frequency\ntaaatcttgtgcttcgttagaagtctcgactacgtgtagcctagtgtttg\n" },
+    { "name": "one thousand", "args": ["1000"], "exitCode": 0, "sha256": "62d1e8d0df7938d2aefda9a37887e0389231ea72c099c29a51afb6edca1bdc73" },
+    { "name": "leading zeros", "args": ["0010"], "exitCode": 0, "stdout": ">ONE Homo sapiens alu\nGGCCGGGCGCGGTGGCTCAC\n>TWO IUB ambiguity codes\ncttBtatcatatgctaKggNcataaaSatg\n>THREE Homo sapiens frequency\ntaaatcttgtgcttcgttagaagtctcgactacgtgtagcctagtgtttg\n" },
+    { "name": "missing argument", "args": [], "exitCode": 1, "stdout": "" },
+    { "name": "too many arguments", "args": ["5", "5"], "exitCode": 1, "stdout": "" },
+    { "name": "not a number", "args": ["abc"], "exitCode": 1, "stdout": "" },
+    { "name": "negative", "args": ["-5"], "exitCode": 1, "stdout": "" },
+    { "name": "plus sign", "args": ["+5"], "exitCode": 1, "stdout": "" },
+    { "name": "too large", "args": ["25000001"], "exitCode": 1, "stdout": "" }
+  ],
+  "benchmarks": [
+    {
+      "id": "1k",
+      "name": "1 thousand",
+      "description": "N = 1,000 (10.2 KB of output, 8,000 random symbols): mostly process and runtime startup.",
+      "args": ["1000"],
+      "warmup": 3,
+      "runs": 20,
+      "sha256": "62d1e8d0df7938d2aefda9a37887e0389231ea72c099c29a51afb6edca1bdc73"
+    },
+    {
+      "id": "2500k",
+      "name": "2.5 million",
+      "description": "N = 2,500,000 (25.4 MB of output, 20 million random symbols): generator steps, floating-point division, cumulative lookups and buffered line output.",
+      "args": ["2500000"],
+      "warmup": 1,
+      "runs": 10,
+      "sha256": "e3600e481ef68b6cd9ac155f93f40ff06a4094128f62895eb37b28ebad7cab72"
+    }
+  ]
+}

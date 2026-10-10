@@ -1,0 +1,189 @@
+/* Tailwind source. Build: npm run build:css → assets/css/app.css */
+@import "tailwindcss" source(none);
+@import "./deathmatch.css" layer(components);
+@source "../../index.html";
+@source "../js";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-display: "Teko", "Arial Narrow", Impact, ui-sans-serif, sans-serif;
+
+  /* Surfaces (dark) */
+  --color-page: #0b0d12;
+  --color-surface: #12151c;
+  --color-raised: #1a1e27;
+  --color-line: #262b36;
+
+  /* Ink */
+  --color-ink: #f3f4f6;
+  --color-ink-2: #b4bac6;
+  --color-ink-3: #8a91a0;
+
+  /* Accents: UI accent (warm) and the single data-series hue (validated on --color-surface) */
+  --color-accent: #fb7a4b;
+  --color-accent-2: #ffb547;
+  --color-series: #3987e5;
+  --color-good: #0ca30c;
+  --color-critical: #d03b3b;
+
+  /* Fighting-game layer: announcer text, K.O. accents, medallions and champion badges */
+  --color-blood: #c81e1e;
+  --color-gold: #f5b301;
+}
+
+/* Chart tokens read by ui/charts.js, so charts and CSS share one source of truth. */
+:root {
+  color-scheme: dark;
+  --ldm-surface: #12151c;
+  --ldm-text: #f3f4f6;
+  --ldm-text-2: #b4bac6;
+  --ldm-muted: #8a91a0;
+  --ldm-grid: #232833;
+  --ldm-axis: #383f4d;
+  --ldm-series: #3987e5;
+  --ldm-series-soft: rgba(57, 135, 229, 0.18);
+}
+
+@layer base {
+  html {
+    background: var(--color-page);
+  }
+
+  body {
+    @apply bg-page text-ink font-sans antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: rgba(251, 122, 75, 0.35);
+  }
+
+  /* Grid items default to min-width:auto and would grow to fit wide tables or code;
+     let them shrink so inner overflow-x containers can scroll instead. */
+  .grid > * {
+    min-width: 0;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line bg-surface;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-raised px-2.5 py-0.5 text-xs font-medium text-ink-2;
+  }
+
+  .lang-dot {
+    @apply inline-block size-2.5 shrink-0 rounded-full;
+    background: var(--lang-color, var(--color-ink-3));
+  }
+
+  .tab {
+    @apply inline-flex items-center gap-2 border-b-2 border-transparent px-1 pb-3 text-sm font-medium text-ink-3 transition-colors hover:text-ink;
+  }
+
+  .tab[aria-selected="true"] {
+    @apply border-accent text-ink;
+  }
+
+  .pill {
+    @apply inline-flex cursor-pointer items-center gap-2 rounded-lg border border-line bg-surface px-3 py-1.5 text-sm text-ink-2 transition-colors hover:border-ink-3 hover:text-ink;
+  }
+
+  .pill[aria-pressed="true"],
+  .pill[aria-selected="true"] {
+    @apply border-accent/60 bg-accent/10 text-ink;
+  }
+
+  .field {
+    @apply w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm text-ink placeholder:text-ink-3 focus:border-accent focus:outline-none;
+  }
+
+  .data-table {
+    @apply w-full text-left text-sm tabular-nums;
+  }
+
+  .data-table th {
+    @apply border-b border-line px-3 py-2 text-xs font-semibold tracking-wide whitespace-nowrap text-ink-3 uppercase;
+  }
+
+  .data-table td {
+    @apply border-b border-line/60 px-3 py-2.5 whitespace-nowrap text-ink-2;
+  }
+
+  .data-table tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .sort-button {
+    @apply inline-flex items-center gap-1 uppercase hover:text-ink;
+  }
+
+  .skeleton {
+    @apply animate-pulse rounded-xl bg-raised;
+  }
+
+  .prose-ldm p {
+    @apply leading-relaxed text-ink-2;
+  }
+
+  .prose-ldm h2 {
+    @apply mt-10 mb-3 text-xl font-semibold text-ink;
+  }
+
+  .prose-ldm ul {
+    @apply list-disc space-y-1.5 pl-5 text-ink-2;
+  }
+
+  .prose-ldm code {
+    @apply rounded bg-raised px-1.5 py-0.5 font-mono text-[0.85em] text-ink;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Code viewer */
+.code-view {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.code-view .gutter {
+  user-select: none;
+  text-align: right;
+  padding: 1rem 0.75rem 1rem 1rem;
+  color: #4b5262;
+  border-right: 1px solid var(--color-line);
+}
+
+.code-view pre {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+}
+
+.code-view .gutter pre {
+  padding: 0;
+  overflow: visible;
+}
+
+.code-view .hljs {
+  background: transparent;
+  padding: 0;
+}
+
+.gradient-text {
+  background: linear-gradient(100deg, var(--color-accent) 10%, var(--color-accent-2) 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

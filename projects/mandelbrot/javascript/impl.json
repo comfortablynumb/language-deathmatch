@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Numbers are IEEE-754 doubles and V8 rounds every operation separately (no FMA contraction).",
+    "Whole rows are packed into a fresh zero-filled ~64 KiB Buffer per chunk, since stdout may still hold the previous one.",
+    "Respects back-pressure: awaits 'drain' when the stream buffer is full (pipes are async in Node)."
+  ],
+  "files": [
+    { "path": "main.js", "role": "source" },
+    { "path": "package.json", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

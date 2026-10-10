@@ -1,0 +1,13 @@
+{
+  "notes": [
+    "f64 arithmetic in the spec's exact order; rustc never contracts a * b + c into an FMA (only an explicit mul_add would).",
+    "Each row is packed into a reused Vec<u8> and written to a 64 KiB BufWriter over the locked stdout handle.",
+    "Digits are checked explicitly because str::parse::<u32> also accepts a leading '+'.",
+    "Release profile: opt-level 3, fat LTO, 1 codegen unit; static musl binary on a scratch image."
+  ],
+  "files": [
+    { "path": "src/main.rs", "role": "source" },
+    { "path": "Cargo.toml", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

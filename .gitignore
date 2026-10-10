@@ -1,0 +1,12 @@
+# Dependencies and build output
+node_modules/
+build/
+*.exe
+
+# Generated site data and CSS (bin/build.sh, bin/bench.sh)
+site/data/
+site/assets/css/app.css
+
+# Local language build artifacts
+projects/**/target/
+projects/**/__pycache__/

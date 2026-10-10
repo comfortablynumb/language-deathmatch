@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Every node is a separate &Node{} on the garbage-collected heap; leaves have nil children.",
+    "Dropped trees are reclaimed by Go's concurrent GC (default GOGC), which also has to scan the long-lived tree.",
+    "Recursive build and check; output through a 64 KiB bufio.Writer; static binary on a scratch image."
+  ],
+  "files": [
+    { "path": "main.go", "role": "source" },
+    { "path": "go.mod", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

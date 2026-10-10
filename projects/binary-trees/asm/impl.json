@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "x86-64 Linux, NASM syntax, no libc: only the write, mmap, munmap and exit syscalls.",
+    "No allocator exists, so 16-byte nodes are carved with a bump pointer from mmap'd arenas sized for exactly one tree (2^(d+1) − 1 nodes).",
+    "Short-lived trees are released by resetting the bump pointer before the next tree (the stretch tree by munmap); the long-lived tree has its own arena.",
+    "Recursive build and check via call/ret (depth ≤ 22); the whole output (< 1 KiB) goes out in one write."
+  ],
+  "files": [
+    { "path": "binary-trees.asm", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "notes": [
+    "Vec<bool> stores one byte per flag (unlike C++'s std::vector<bool>, it is never bit-packed).",
+    "Multiples are crossed off with (p * p..=n).step_by(p); the outer bound is usize::isqrt(n).",
+    "Digits are checked explicitly because str::parse::<usize> also accepts a leading '+'.",
+    "Release profile: opt-level 3, fat LTO, 1 codegen unit; static musl binary on a scratch image."
+  ],
+  "files": [
+    { "path": "src/main.rs", "role": "source" },
+    { "path": "Cargo.toml", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

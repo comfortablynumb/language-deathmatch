@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Every node is a Node instance with left/right fields (null for a leaf); one class keeps V8's hidden class monomorphic.",
+    "Short-lived trees die in V8's young generation (scavenger); the long-lived tree is promoted to the old generation.",
+    "The few output lines are built as one string and written once, awaiting 'drain' on back-pressure."
+  ],
+  "files": [
+    { "path": "main.js", "role": "source" },
+    { "path": "package.json", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

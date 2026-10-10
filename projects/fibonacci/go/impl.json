@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "uint64 addition wraps modulo 2^64 natively.",
+    "strconv.AppendUint formats into a reused byte slice: no allocation per number.",
+    "bufio.Writer with a 64 KiB buffer; static binary on a scratch image."
+  ],
+  "files": [
+    { "path": "main.go", "role": "source" },
+    { "path": "go.mod", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "x86-64 Linux, NASM syntax, no libc: only the write and exit syscalls.",
+    "SSE2 scalar doubles (cvtsi2sd, mulsd, divsd, addsd, subsd, ucomisd): one rounded operation per instruction, in the spec's order.",
+    "in_set answers in the carry flag, and adc shifts that bit straight into the byte being packed.",
+    "Own 64 KiB output buffer, flushed with a retry loop for partial writes; ~8 KiB static binary."
+  ],
+  "files": [
+    { "path": "mandelbrot.asm", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

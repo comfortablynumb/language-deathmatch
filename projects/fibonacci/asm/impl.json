@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "x86-64 Linux, NASM syntax, no libc: only the write and exit syscalls.",
+    "lea computes a + b modulo 2^64; the three running values live in callee-saved registers.",
+    "Division by 10 via multiplication by the reciprocal 0xCCCCCCCCCCCCCCCD (what compilers emit).",
+    "Own 64 KiB output buffer, flushed with a retry loop for partial writes; ~8 KiB static binary."
+  ],
+  "files": [
+    { "path": "fibonacci.asm", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

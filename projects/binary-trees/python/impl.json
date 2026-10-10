@@ -1,0 +1,11 @@
+{
+  "notes": [
+    "A node is a (left, right) tuple; a leaf is (None, None), built from variables so every node is a fresh allocation.",
+    "Reference counting frees a dropped tree node by node as soon as its root loses its last reference; freed 2-tuples are recycled through CPython's tuple free list.",
+    "Recursive build and check (depth ≤ 22, far below the recursion limit); the lines go out in one sys.stdout.writelines call."
+  ],
+  "files": [
+    { "path": "main.py", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

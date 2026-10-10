@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "std::vector<std::uint8_t> keeps one byte per flag; std::vector<bool> would pack bits, which the rules forbid.",
+    "std::size_t indices (64-bit): p * p and multiple += p cannot overflow for N ≤ 200000000.",
+    "std::from_chars parses without locale or exceptions; digits are validated first.",
+    "g++ -O2, statically linked and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.cpp", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

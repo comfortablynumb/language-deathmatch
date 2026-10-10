@@ -1,0 +1,16 @@
+[
+  { "id": "algorithms", "name": "Algorithms & Math", "description": "CPU-bound integer and numeric computation in tight loops.",
+    "arena": { "stage": "The Number Pit", "tagline": "Tight loops and raw arithmetic. Nowhere to hide.", "color": "#f97316" } },
+  { "id": "data-structures", "name": "Data Structures & Memory", "description": "Allocation, garbage collection pressure, pointer chasing and hash maps.",
+    "arena": { "stage": "The Heap", "tagline": "Allocate fast or get collected.", "color": "#22c55e" } },
+  { "id": "text-processing", "name": "Text & Data Processing", "description": "Parsing, string handling and I/O on text formats such as JSON and CSV.",
+    "arena": { "stage": "The Scriptorium", "tagline": "Every byte formatted, every line written.", "color": "#eab308" } },
+  { "id": "simulation", "name": "Simulation & Graphics", "description": "Floating point physics, fractals and rendering.",
+    "arena": { "stage": "The Floating Point", "tagline": "Physics, fractals and a billion multiplications.", "color": "#06b6d4" } },
+  { "id": "concurrency", "name": "Concurrency & Parallelism", "description": "Threads, async runtimes, channels and work distribution.",
+    "arena": { "stage": "The Thread Pit", "tagline": "Many hands, one winner.", "color": "#a855f7" } },
+  { "id": "web", "name": "Web & Networking", "description": "HTTP servers, REST APIs and WebSockets under load.",
+    "arena": { "stage": "The Request Gauntlet", "tagline": "Throughput under fire.", "color": "#3b82f6" } },
+  { "id": "systems", "name": "Systems & Services", "description": "Multi-component applications with databases, caches and protocols.",
+    "arena": { "stage": "The Datacenter", "tagline": "Databases, caches and nowhere to run.", "color": "#ef4444" } }
+]

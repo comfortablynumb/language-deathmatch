@@ -1,0 +1,11 @@
+{
+  "notes": [
+    "Python integers are unbounded, so (a + b) & MASK emulates 64-bit wrapping.",
+    "A generator feeds sys.stdout.writelines; stdout is block-buffered when not a TTY.",
+    "isascii() + isdigit() rejects signs, spaces and non-ASCII digits such as '²'."
+  ],
+  "files": [
+    { "path": "main.py", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

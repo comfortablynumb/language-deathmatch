@@ -1,0 +1,98 @@
+[
+  {
+    "id": "go",
+    "name": "Go",
+    "color": "#00ADD8",
+    "kind": "compiled",
+    "toolchain": "Go 1.27",
+    "image": "golang:1.27-alpine3.24",
+    "website": "https://go.dev",
+    "fighter": {
+      "glyph": "Go",
+      "nickname": "The Gopher",
+      "special": "Goroutine Barrage",
+      "fatality": "Garbage Collected",
+      "quote": "Simple wins. Ship it."
+    }
+  },
+  {
+    "id": "rust",
+    "name": "Rust",
+    "color": "#DEA584",
+    "kind": "compiled",
+    "toolchain": "Rust 1.99",
+    "image": "rust:1.99-alpine3.24",
+    "website": "https://www.rust-lang.org",
+    "fighter": {
+      "glyph": "Rs",
+      "nickname": "The Crab",
+      "special": "Borrow Checker Slam",
+      "fatality": "Lifetime Expired",
+      "quote": "Fearless. Safe. Merciless."
+    }
+  },
+  {
+    "id": "cpp",
+    "name": "C++",
+    "color": "#659AD2",
+    "kind": "compiled",
+    "toolchain": "GCC 16.2 (C++23)",
+    "image": "gcc:16.2-trixie",
+    "website": "https://isocpp.org",
+    "fighter": {
+      "glyph": "C++",
+      "nickname": "The Template",
+      "special": "Template Avalanche",
+      "fatality": "Undefined Behavior",
+      "quote": "You only pay for what you use. You lose."
+    }
+  },
+  {
+    "id": "asm",
+    "name": "Assembly",
+    "color": "#9CA3AF",
+    "kind": "assembled",
+    "toolchain": "NASM x86-64 (Linux)",
+    "image": "alpine:3.24",
+    "website": "https://www.nasm.us",
+    "fighter": {
+      "glyph": "ASM",
+      "nickname": "The Bare Metal",
+      "special": "Raw Syscall",
+      "fatality": "Segmentation Fault",
+      "quote": "No runtime. No mercy."
+    }
+  },
+  {
+    "id": "python",
+    "name": "Python",
+    "color": "#3776AB",
+    "kind": "interpreted",
+    "toolchain": "CPython 3.14",
+    "image": "python:3.14-slim-trixie",
+    "website": "https://www.python.org",
+    "fighter": {
+      "glyph": "Py",
+      "nickname": "The Serpent",
+      "special": "Comprehension Coil",
+      "fatality": "IndentationError",
+      "quote": "Readability counts. So does winning."
+    }
+  },
+  {
+    "id": "javascript",
+    "name": "JavaScript",
+    "color": "#F7DF1E",
+    "kind": "jit",
+    "toolchain": "Node.js 24 LTS",
+    "image": "node:24-trixie-slim",
+    "website": "https://nodejs.org",
+    "fighter": {
+      "glyph": "JS",
+      "nickname": "The Event Loop",
+      "special": "Callback Combo",
+      "fatality": "undefined is not a function",
+      "quote": "I run everywhere. Even here."
+    }
+  }
+]

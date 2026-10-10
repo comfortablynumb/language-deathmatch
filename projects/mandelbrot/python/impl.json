@@ -1,0 +1,11 @@
+{
+  "notes": [
+    "Python floats are IEEE-754 doubles and CPython rounds every operation separately, so the bits match the compiled languages.",
+    "Each row is a bytearray (bits set with |= 0x80 >> (x & 7)) written to the binary sys.stdout.buffer.",
+    "isascii() + isdigit() rejects signs, spaces and non-ASCII digits such as '²'."
+  ],
+  "files": [
+    { "path": "main.py", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

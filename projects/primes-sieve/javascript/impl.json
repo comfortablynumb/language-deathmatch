@@ -1,0 +1,13 @@
+{
+  "notes": [
+    "Uint8Array gives one byte per flag in a single contiguous buffer; fill(1) then fill(0, 0, 2).",
+    "Indices stay below 2^31, so V8 keeps them as small integers in the hot loops.",
+    "The sum stays below 2^53 for N ≤ 200000000, so a plain Number is exact (no BigInt needed).",
+    "One process.stdout.write for the three lines; the process exits naturally so the write is flushed."
+  ],
+  "files": [
+    { "path": "main.js", "role": "source" },
+    { "path": "package.json", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

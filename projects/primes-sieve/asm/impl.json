@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "x86-64 Linux, NASM syntax, no libc: only the mmap, write and exit syscalls.",
+    "The N + 1 flag bytes come from an anonymous mmap (zeroed pages); rep stosb marks 2..N as prime.",
+    "Crossing off and the scan are plain byte loops; count, sum and largest live in callee-saved registers.",
+    "Division by 10 via multiplication by the reciprocal 0xCCCCCCCCCCCCCCCD; one write for the whole output."
+  ],
+  "files": [
+    { "path": "primes-sieve.asm", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

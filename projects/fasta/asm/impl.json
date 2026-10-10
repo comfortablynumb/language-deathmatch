@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "x86-64 Linux, NASM syntax, no libc: only the write and exit syscalls.",
+    "seed mod 139968 via reciprocal multiplication (what compilers emit); r = cvtsi2sd + divsd, the scan uses comisd.",
+    "The cumulative table is summed at run time with addsd, so it matches the other languages bit for bit.",
+    "ALU is stored with its first 84 bytes repeated, so each line is a single rep movsb; own 64 KiB output buffer."
+  ],
+  "files": [
+    { "path": "fasta.asm", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

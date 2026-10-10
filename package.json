@@ -1,0 +1,19 @@
+{
+  "name": "language-deathmatch",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Same programs in many languages: code side by side and benchmarks run in Docker.",
+  "scripts": {
+    "build:css": "tailwindcss -i site/assets/css/input.css -o site/assets/css/app.css --minify",
+    "watch:css": "tailwindcss -i site/assets/css/input.css -o site/assets/css/app.css --watch",
+    "test": "node --test \"tests/site/*.test.js\""
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.3",
+    "tailwindcss": "4.3.3"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

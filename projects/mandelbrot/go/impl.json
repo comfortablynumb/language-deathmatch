@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "float64 arithmetic in the spec's exact order; float64(…) conversions round each product, since the Go spec otherwise allows fusing x*y + z into an FMA.",
+    "Each row is packed into a reused byte slice (8 pixels per byte, MSB first) and written to a 64 KiB bufio.Writer.",
+    "Default GOAMD64=v1 (no FMA instructions); static binary on a scratch image."
+  ],
+  "files": [
+    { "path": "main.go", "role": "source" },
+    { "path": "go.mod", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

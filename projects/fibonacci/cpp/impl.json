@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "std::uint64_t arithmetic wraps modulo 2^64 by definition (unsigned overflow is well defined).",
+    "std::from_chars parses without locale or exceptions; digits are validated first.",
+    "std::cout with sync_with_stdio(false) and '\n' (never std::endl, which flushes).",
+    "g++ -O2, statically linked and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.cpp", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

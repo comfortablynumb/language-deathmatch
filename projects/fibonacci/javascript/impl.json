@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Numbers are IEEE-754 doubles, so 64-bit values need BigInt; BigInt.asUintN(64, …) wraps.",
+    "Lines are batched into ~64 KiB string chunks before writing to process.stdout.",
+    "Respects back-pressure: awaits 'drain' when the stream buffer is full (pipes are async in Node)."
+  ],
+  "files": [
+    { "path": "main.js", "role": "source" },
+    { "path": "package.json", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

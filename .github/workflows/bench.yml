@@ -1,0 +1,63 @@
+name: Benchmarks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "projects/**"
+      - "catalog/**"
+      - "tools/**"
+      - "site/**"
+      - "package*.json"
+      - ".github/workflows/bench.yml"
+  schedule:
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  bench:
+    name: Benchmark and build site
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: tools/go.mod
+          cache: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Benchmark every implementation (sequential, pinned to CPU 1)
+        run: bin/bench.sh -cpuset 1
+      - name: Generate site data and CSS
+        run: bin/build.sh
+      - uses: actions/upload-artifact@v7
+        with:
+          name: results
+          path: site/data/results.json
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: bench
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

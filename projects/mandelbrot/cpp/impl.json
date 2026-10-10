@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "-ffp-contract=off stops GCC from fusing a * b + c into an FMA (the default x86-64 baseline has none anyway).",
+    "Each row is packed into a reused std::vector<unsigned char> and written with std::ostream::write.",
+    "std::from_chars parses without locale or exceptions; digits are validated first.",
+    "g++ -O2, statically linked and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.cpp", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

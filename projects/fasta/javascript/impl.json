@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Generator values stay below 2^30, so plain Numbers keep the integer arithmetic exact; seed / IM is an IEEE double division.",
+    "Linear scan over a Float64Array of cumulative probabilities.",
+    "Lines are built in a Uint8Array and copied into 64 KiB Buffer chunks; awaits 'drain' on stdout back-pressure."
+  ],
+  "files": [
+    { "path": "main.js", "role": "source" },
+    { "path": "package.json", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

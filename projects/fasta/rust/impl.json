@@ -1,0 +1,13 @@
+{
+  "notes": [
+    "u32 generator state: seed * 3877 + 29573 stays below 2^30, so plain * and + never overflow.",
+    "Iterator::position scans the cumulative Vec<f64> built with Iterator::scan.",
+    "Each line is filled into a [u8; 61] array and written with write_all into a 64 KiB BufWriter over the locked stdout.",
+    "Release profile: opt-level 3, fat LTO, 1 codegen unit; static musl binary on a scratch image."
+  ],
+  "files": [
+    { "path": "src/main.rs", "role": "source" },
+    { "path": "Cargo.toml", "role": "build" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}
