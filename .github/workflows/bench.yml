@@ -6,6 +6,7 @@ on:
     paths:
       - "projects/**"
       - "catalog/**"
+      - "bin/**"
       - "tools/**"
       - "site/**"
       - "package*.json"
