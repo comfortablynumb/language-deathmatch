@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Word64 addition wraps modulo 2^64; bang patterns keep both running values evaluated, so no thunks pile up.",
+    "word64Dec renders each number straight into the output buffer: the Builder is consumed by hPutBuilder as it is produced, in constant memory.",
+    "The argument is checked to be ASCII digits before read parses it as an unbounded Integer, so huge inputs cannot overflow.",
+    "ghc -O2 with the non-threaded RTS; fully static (glibc, GMP) and stripped, on a scratch image."
+  ],
+  "files": [
+    { "path": "Main.hs", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

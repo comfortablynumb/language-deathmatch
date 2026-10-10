@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "data Tree = Nil | Node !Tree !Tree: one heap object per node (a leaf is Node Nil Nil); the strict fields build each tree completely, bottom-up, before it is checked.",
+    "-fno-full-laziness and -fno-cse stop GHC from hoisting the loop-invariant make depth out of the iteration loop and from sharing a node's two identical subtrees, so every tree is really allocated (≈ 360 MB allocated for N = 16, 24 bytes per node).",
+    "evaluate sequences stretch tree, long-lived tree and iterations in IO; dead trees die in the default 4 MB nursery of GHC's generational copying GC (default RTS settings).",
+    "ghc -O2, non-threaded RTS; fully static (glibc, GMP) and stripped, on a scratch image."
+  ],
+  "files": [
+    { "path": "Main.hs", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

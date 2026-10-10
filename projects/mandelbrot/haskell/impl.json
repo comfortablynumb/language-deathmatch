@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Plain Double arithmetic in the spec's order (* and + are left-associative); tr and ti are always zr * zr and zi * zi, so the strict loop carries only the counter, zr and zi.",
+    "GHC never fuses a * b + c into an FMA, and on the default x86-64 baseline its native code generator emits scalar SSE2: the loop runs fully unboxed in registers, but with extra register copies that make it about 2× slower than GCC or LLVM output.",
+    "Each byte packs 8 pixels with a foldl' (shift left, or the bit), padding past the right edge with zeros; rows stream as word8 Builders into a 64 KiB block-buffered binary stdout.",
+    "ghc -O2, non-threaded RTS; fully static (glibc, GMP) and stripped, on a scratch image."
+  ],
+  "files": [
+    { "path": "Main.hs", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

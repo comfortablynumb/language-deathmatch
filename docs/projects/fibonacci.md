@@ -7,7 +7,7 @@
 | Level | 1 — Trivial |
 | Kind | `cli` |
 | Tags | `cpu-bound`, `integer-arithmetic`, `loops`, `stdout`, `startup` |
-| Languages | Go, Rust, C++, Assembly, Python, JavaScript |
+| Languages | Go, Rust, C++, C, Assembly, Zig, V, Java, Haskell, Python, JavaScript |
 
 ## Goal
 
@@ -74,6 +74,11 @@ large N measures integer arithmetic, number formatting and buffered output throu
 | Go | `uint64` wraps natively; `strconv.AppendUint` into a reused buffer; `bufio.Writer` 64 KiB |
 | Rust | `u64::wrapping_add`; `writeln!` into `BufWriter` over locked stdout; explicit digit check (Rust's parser accepts `+`) |
 | C++ | `std::uint64_t` wraps; `std::from_chars` parsing; `std::cout` with `sync_with_stdio(false)` |
+| C | `uint64_t` wraps; digits checked before `strtoull`; `fprintf` with `PRIu64` into a 64 KiB `setvbuf` buffer |
 | Assembly | x86-64 NASM, raw `write`/`exit` syscalls, reciprocal-multiplication division by 10, 64 KiB buffer |
+| Zig | `u64` with `+%` (explicit wrapping); `print` into a 64 KiB streaming `std.Io.File.Writer`; static, no libc, `-mcpu baseline` |
+| V | `u64` wraps (compiled to C); `strings.Builder.write_u_decimal` formats without allocating; 64 KiB chunks to `os.stdout()` (V leaves C's stdout unbuffered) |
+| Java | `long` wraps (two's complement), printed with `Long.toUnsignedString` into ~64 KiB `StringBuilder` chunks; 64 KiB `BufferedOutputStream` |
+| Haskell | `Word64` wraps; bang patterns; `word64Dec` streamed by `hPutBuilder` in constant memory; static GHC binary on `scratch` |
 | Python | `(a + b) & MASK`; generator + `sys.stdout.writelines` |
 | JavaScript | `BigInt.asUintN(64, a + b)`; 64 KiB string chunks; awaits `drain` on back-pressure |

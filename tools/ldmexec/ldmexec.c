@@ -98,8 +98,14 @@ static int trace_child(pid_t pid, int *status, struct rusage *usage, long *exit_
 
         if (!options_set && signal == SIGTRAP) {
             // First stop: right after execve, before the program runs.
-            ptrace(PTRACE_SETOPTIONS, pid, 0, PTRACE_O_TRACEEXIT | PTRACE_O_EXITKILL);
+            ptrace(PTRACE_SETOPTIONS, pid, 0,
+                   PTRACE_O_TRACEEXIT | PTRACE_O_TRACEEXEC | PTRACE_O_EXITKILL);
             options_set = 1;
+            signal = 0;
+        } else if ((*status >> 8) == (SIGTRAP | (PTRACE_EVENT_EXEC << 8))) {
+            // A later execve by the program itself (e.g. the JDK launcher on musl re-executes
+            // itself to set LD_LIBRARY_PATH): an event stop, not a signal to deliver. Without
+            // PTRACE_O_TRACEEXEC it would arrive as a plain SIGTRAP and kill the program.
             signal = 0;
         } else if ((*status >> 8) == (SIGTRAP | (PTRACE_EVENT_EXIT << 8))) {
             *exit_rss = read_rss_kib(pid);

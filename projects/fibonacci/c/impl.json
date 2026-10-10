@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "uint64_t addition wraps modulo 2^64 by definition (unsigned overflow is well defined in C).",
+    "Digits are validated before strtoull, which alone would accept a sign or leading spaces.",
+    "fprintf with PRIu64 into stdout, fully buffered by setvbuf with a 64 KiB buffer; fflush and ferror report write errors at the end.",
+    "gcc -std=c23 -O2, statically linked and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.c", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

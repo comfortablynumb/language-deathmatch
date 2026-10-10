@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Every node is its own allocator.create(Node) with ?*Node children (null for a leaf), from init.gpa: std.heap.smp_allocator in a ReleaseFast build without libc (no arena).",
+    "Each tree is freed node by node with allocator.destroy right after its check; the long-lived tree is freed by a defer once the last line is written.",
+    "Digits are checked explicitly because std.fmt.parseInt also accepts a leading sign and '_' digit separators.",
+    "zig build-exe -O ReleaseFast -fstrip -mcpu baseline: no libc, a static binary on a scratch image; baseline x86-64 like the other compiled languages (Zig otherwise targets the build host's CPU)."
+  ],
+  "files": [
+    { "path": "main.zig", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

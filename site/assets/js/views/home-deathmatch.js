@@ -36,7 +36,7 @@ export function hero(ctx) {
           <button type="button" class="pill" data-scroll="projects">Browse the code</button>
         </div>
       </div>
-      <div class="grid grid-cols-3 gap-3" aria-label="Fighters">${catalog.languages.map(rosterLink).join('')}</div>
+      <div class="grid grid-cols-3 gap-3 sm:grid-cols-4" aria-label="Fighters">${catalog.languages.map(rosterLink).join('')}</div>
     </div>
     <div class="relative mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
       ${c.statTile('Fighters', catalog.languages.length)}

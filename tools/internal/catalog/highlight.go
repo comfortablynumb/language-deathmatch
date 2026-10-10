@@ -25,6 +25,12 @@ var highlightByExt = map[string]string{
 	".asm":  "x86asm",
 	".s":    "x86asm",
 	".py":   "python",
+	".java": "java",
+	".hs":   "haskell",
+	// highlight.js has no Zig or V grammar; Rust's keywords (fn, pub, const, mut, struct,
+	// match, return), strings, comments and numbers cover theirs closely.
+	".zig":  "rust",
+	".v":    "rust",
 	".js":   "javascript",
 	".mjs":  "javascript",
 	".cjs":  "javascript",

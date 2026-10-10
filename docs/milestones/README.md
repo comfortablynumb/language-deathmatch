@@ -32,6 +32,7 @@ replay of `results.json`.
 | M4 | [Arena roster](m4-arena-roster.md) | Four new projects × six languages so four arenas are open | M1 | ✅ |
 | M5 | [Deathmatch UI](m5-deathmatch-ui.md) | Fighter/arena select, tower, animated fight, arena rankings, home + nav integration | M3 | ✅ |
 | M6 | [Launch](m6-launch.md) | Full benchmark run, browser QA, README / CLAUDE.md / docs in sync, all tests green | M4, M5 | ✅ |
+| M7 | [New fighters: C, Zig, V, Java, Haskell](m7-new-fighters.md) | Five more languages in every arena: 25 new implementations, profiles, highlighting | M6 | ✅ |
 
 M4 (implementations in Docker) and M5 (website) are independent and can run in parallel once
 M3 has fixed the data contract.

@@ -60,7 +60,7 @@ Free-form, lowercase, kebab-case. Recommended vocabulary (keep it small so filte
 
 ## Projects
 
-Five projects are implemented (✅) in all six languages; the rest is the backlog, ordered by level.
+Five projects are implemented (✅) in all eleven languages; the rest is the backlog, ordered by level.
 Assembly is expected to cover levels 1–3 only; higher levels show "not implemented" for it.
 
 | Project | Category | Level | Kind | Tags | Status |

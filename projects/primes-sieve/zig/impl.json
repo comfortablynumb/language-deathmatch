@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "A []bool (one byte per flag) allocated from init.gpa, the process's default general-purpose allocator, and filled with @memset.",
+    "Multiples are crossed off with while (multiple <= n) : (multiple += p) loops over usize indices; the outer loop runs while p * p <= n.",
+    "Digits are checked explicitly because std.fmt.parseInt also accepts a leading sign and '_' digit separators.",
+    "zig build-exe -O ReleaseFast -fstrip -mcpu baseline: no libc, a static binary on a scratch image; baseline x86-64 like the other compiled languages (Zig otherwise targets the build host's CPU)."
+  ],
+  "files": [
+    { "path": "main.zig", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "One malloc'd unsigned char flag per integer 0..N (N + 1 bytes), set by memset; no bit packing.",
+    "size_t indices (64-bit): p * p and multiple += p cannot overflow for N ≤ 200000000.",
+    "Digits are validated before strtoull, which alone would accept a sign or leading spaces.",
+    "gcc -std=c23 -O2, statically linked and stripped, running on a scratch image; stdout fully buffered by setvbuf (64 KiB)."
+  ],
+  "files": [
+    { "path": "main.c", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

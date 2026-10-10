@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "int generator state: seed * 3877 + 29573 stays below 2^30, so no overflow; (double) seed / IM is a plain IEEE division.",
+    "Linear scan over a cumulative double[]; the tables are built from Acid records.",
+    "ALU lines are slices of the bytes of alu + alu[0..60), so a line never needs to wrap mid-copy.",
+    "Lines are built in a byte[61] and written to a 64 KiB BufferedOutputStream over FileDescriptor.out; default JVM flags."
+  ],
+  "files": [
+    { "path": "Main.java", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

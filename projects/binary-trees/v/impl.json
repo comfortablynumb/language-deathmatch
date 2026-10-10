@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Every node is a separate &Node{} on V's garbage-collected heap; leaves have nil children (unsafe { nil } field defaults).",
+    "V's default GC is Boehm (boehm_full_opt): -prod compiles in the bundled gc.c, a conservative, non-incremental mark-sweep collector that also has to mark the long-lived tree.",
+    "Recursive build and check; the result lines collect in a strings.Builder written to os.stdout() once.",
+    "v -prod (gcc -O3 -flto), statically linked against musl and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.v", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

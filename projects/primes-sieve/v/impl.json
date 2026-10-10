@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "[]bool uses one byte per flag; init: index >= 2 marks 2..N as candidates in one pass.",
+    "V's int is always 32 bits: p * p and m + p stay below 2^31 for N ≤ 200000000. Indexing keeps V's default bounds checks.",
+    "The three result lines are built with string interpolation and written to os.stdout() in one call.",
+    "v -prod (gcc -O3 -flto), statically linked against musl and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.v", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

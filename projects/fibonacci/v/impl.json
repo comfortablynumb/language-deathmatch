@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "u64 addition wraps modulo 2^64: V compiles to C, where unsigned overflow is well defined.",
+    "strings.Builder.write_u_decimal formats each number straight into the buffer, without allocating.",
+    "V switches C's stdout to unbuffered at startup, so output collects in a 64 KiB strings.Builder written to os.stdout() per chunk.",
+    "v -prod (gcc -O3 -flto), statically linked against musl and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.v", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

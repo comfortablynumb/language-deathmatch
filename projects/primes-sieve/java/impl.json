@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "boolean[] is one byte per flag in HotSpot and zero-filled by new; Arrays.fill sets 2..N (BitSet would pack bits, which the rules forbid).",
+    "Java arrays have int indices: p * p and multiple += p stay below 2^31 for N ≤ 200000000; the sum is a long.",
+    "Digits are checked explicitly because Integer.parseInt also accepts a leading '+'.",
+    "javac --release 25, run with java -cp on the Temurin JRE with default JVM flags; the 200 MB maximum fits the default max heap (a quarter of RAM)."
+  ],
+  "files": [
+    { "path": "Main.java", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

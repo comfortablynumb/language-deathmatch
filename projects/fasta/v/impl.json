@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "u32 generator state: seed * 3877 + 29573 stays below 2^30, so no overflow.",
+    "Linear scan over a cumulative []f64; f64(seed) / f64(im) is a plain IEEE division.",
+    "ALU lines are slices of the bytes of alu + alu[..60] (array slices share memory), so a line never wraps mid-copy.",
+    "Lines collect in a 64 KiB strings.Builder written to os.stdout() per chunk (V leaves C's stdout unbuffered); v -prod static binary on a scratch image."
+  ],
+  "files": [
+    { "path": "main.v", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

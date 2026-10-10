@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "u32 generator state: seed * 3877 + 29573 stays below 2^30, so plain * and + never overflow.",
+    "Both cumulative tables are summed in f64 at compile time (comptime); pick is a linear scan over them.",
+    "Each line is filled into a [61]u8 array and written into a 64 KiB std.Io.Writer over stdout; ALU lines are sliced from alu ++ alu[0..60], concatenated at compile time.",
+    "zig build-exe -O ReleaseFast -fstrip -mcpu baseline: no libc, a static binary on a scratch image; baseline x86-64 like the other compiled languages (Zig otherwise targets the build host's CPU)."
+  ],
+  "files": [
+    { "path": "main.zig", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

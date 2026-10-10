@@ -18,7 +18,8 @@ Planned and delivered milestone by milestone in [milestones/](milestones/README.
 - [x] M1 Rebrand to Language Deathmatch (names, tools `ldm`/`ldmmeasure`/`ldmexec`, image tags, logo)
 - [x] M2 Fighter and arena profiles in the catalog; `benchmarks` + `loc` in `catalog.json`
 - [x] M3 Fight engine: arenas, rules of combat, standings, towers, climbs, fight script, player (unit tested)
-- [x] M4 Arena roster: primes-sieve, fasta, binary-trees, mandelbrot in all six languages
+- [x] M4 Arena roster: primes-sieve, fasta, binary-trees, mandelbrot in all six initial languages
+- [x] M7 New fighters: C, Zig, V, Java, Haskell (all five projects each)
 - [x] M5 Deathmatch UI: select, tower, animated fight, rankings, fighters page, home integration
 - [x] M6 Launch: full benchmark run, browser QA, docs
 
@@ -48,6 +49,7 @@ Planned and delivered milestone by milestone in [milestones/](milestones/README.
 
 ## Phase 5 — Breadth 🔜
 
-- [ ] More languages: Java, C#, Kotlin, Zig, C, Ruby, PHP, TypeScript (Deno/Bun), Elixir, Haskell
+- [x] More languages, first wave ([M7](milestones/m7-new-fighters.md)): C, Zig, V, Java, Haskell
+- [ ] More languages: C#, Kotlin, Ruby, PHP, TypeScript (Deno/Bun), Elixir
 - [ ] Expert projects: lox-interpreter, ray-tracer
 - [ ] PR benchmark diff comments

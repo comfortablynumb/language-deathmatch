@@ -7,7 +7,7 @@
 | Level | 3 — Medium |
 | Kind | `cli` |
 | Tags | `memory`, `recursion`, `allocation`, `garbage-collection`, `pointer-chasing` |
-| Languages | Go, Rust, C++, Assembly, Python, JavaScript |
+| Languages | Go, Rust, C++, C, Assembly, Zig, V, Java, Haskell, Python, JavaScript |
 
 ## Goal
 
@@ -107,6 +107,11 @@ The exact expected text of every case is in `projects/binary-trees/project.json`
 | Go | `&Node{}` per node on the GC heap (default `GOGC`); recursive build and check; `bufio.Writer` 64 KiB |
 | Rust | `Box<Node>` with `Option<Box<Node>>` children; drop frees node by node through musl's malloc; `BufWriter` over locked stdout |
 | C++ | `std::make_unique<Node>` per node; `unique_ptr` destructors free the tree recursively; `std::cout` with `sync_with_stdio(false)` |
+| C | One `malloc` per node; recursive `free_tree` right after each check (glibc malloc, static); `setvbuf` 64 KiB |
 | Assembly | x86-64 NASM, raw `write`/`mmap`/`munmap`/`exit` syscalls; bump-pointer arenas sized for one tree each; one `write` at the end |
+| Zig | One `allocator.create(Node)` per node from `init.gpa` (`smp_allocator` in ReleaseFast, no arena); `destroy` node by node after each check |
+| V | One `&Node{}` per node on V's default Boehm GC (conservative, non-incremental mark-sweep, bundled `gc.c`); `nil` children for leaves |
+| Java | `record Node(Node left, Node right)`, one object per node; default GC (G1, or Serial when pinned to one CPU) |
+| Haskell | `data Tree = Nil \| Node !Tree !Tree`; `-fno-full-laziness -fno-cse` so every tree is really built (no hoisting or shared subtrees); default RTS, dead trees die in the nursery |
 | Python | `(left, right)` tuples built from variables (every node, leaves included, is a fresh tuple); reference counting frees dropped trees |
 | JavaScript | `Node` class instances (one hidden class); dropped trees die in V8's young generation; output written once, honoring `drain` |

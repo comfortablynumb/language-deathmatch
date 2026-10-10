@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "long addition wraps modulo 2^64 (two's complement); Long.toUnsignedString prints the unsigned value.",
+    "Lines are batched into ~64 KiB StringBuilder chunks and written as ASCII bytes to a BufferedOutputStream over FileDescriptor.out.",
+    "Digits are checked explicitly because Long.parseLong also accepts a leading '+'.",
+    "Default JVM flags: startup dominates small N, and the short-lived Strings pile up in G1's young generation, so peak memory reflects default heap sizing rather than live data."
+  ],
+  "files": [
+    { "path": "Main.java", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Int generator state threaded explicitly through a strict IO loop, so record THREE continues where record TWO stopped; r = fromIntegral seed / 139968 is an IEEE-754 Double division.",
+    "scanl1 (+) builds the cumulative UArray Int Double in table order; pick scans it linearly for the first entry greater than r.",
+    "Each random line is filled by Data.ByteString.unfoldrN (one generator step per symbol), which also hands back the state after the line; ALU lines are zero-copy slices of ALU ++ its first 60 characters.",
+    "Lines go through hPutBuilder into a 64 KiB block-buffered stdout; ghc -O2, non-threaded RTS, fully static on a scratch image."
+  ],
+  "files": [
+    { "path": "Main.hs", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

@@ -7,7 +7,7 @@
 | Level | 2 — Easy |
 | Kind | `cli` |
 | Tags | `cpu-bound`, `memory`, `loops`, `integer-arithmetic` |
-| Languages | Go, Rust, C++, Assembly, Python, JavaScript |
+| Languages | Go, Rust, C++, C, Assembly, Zig, V, Java, Haskell, Python, JavaScript |
 
 ## Goal
 
@@ -94,6 +94,11 @@ For `N = 100000000` the output is `count: 5761455`, `sum: 279209790387276`,
 | Go | `[]bool` (one byte each), zero-filled by `make`, 2..N set to `true`; `int` indices; `bufio.Writer` |
 | Rust | `vec![true; n + 1]` (`Vec<bool>` is one byte per flag); `(p*p..=n).step_by(p)`; `usize::isqrt`; `BufWriter` over locked stdout |
 | C++ | `std::vector<std::uint8_t>` (not the bit-packed `std::vector<bool>`); `std::size_t` indices; `std::from_chars` parsing |
+| C | `malloc`'d `unsigned char` flags (N + 1 bytes) set with `memset`; `size_t` indices; `setvbuf` 64 KiB |
 | Assembly | x86-64 NASM, `mmap` for the zeroed flag array, `rep stosb` to mark 2..N, byte loops, raw `write`/`exit` |
+| Zig | `[]bool` (one byte each) from `init.gpa`, `@memset`; `usize` indices; 64 KiB buffered writer |
+| V | `[]bool` (one byte each); 32-bit `int` indices; V's default bounds checks kept (no `@[direct_array_access]`), which costs ~2× here |
+| Java | `new boolean[n + 1]` (one byte each in HotSpot) + `Arrays.fill`; `int` indices; 64 KiB `BufferedOutputStream` |
+| Haskell | `STUArray Int Word8` (one byte per flag — a `Bool` array would be bit-packed); strict `ST` loops with bounds-checked `readArray`/`writeArray`; `foldl'` scan |
 | Python | `bytearray`; slice assignment crosses off multiples in C; `itertools.compress` yields the primes for the scan |
 | JavaScript | `Uint8Array` filled with 1; small-integer indices; the sum fits in a `Number` exactly (< 2^53) |

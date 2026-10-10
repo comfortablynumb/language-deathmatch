@@ -7,7 +7,7 @@
 | Level | 2 — Easy |
 | Kind | `cli` |
 | Tags | `strings`, `stdout`, `floating-point`, `io-bound` |
-| Languages | Go, Rust, C++, Assembly, Python, JavaScript |
+| Languages | Go, Rust, C++, C, Assembly, Zig, V, Java, Haskell, Python, JavaScript |
 
 ## Goal
 
@@ -112,6 +112,11 @@ Sanity anchor (the Benchmarks Game reference output): for `N = 1000`, the first 
 | Go | `uint32` seed; linear scan over a `[]float64`; ALU lines sliced from `alu + alu[:60]`; `bufio.Writer` 64 KiB |
 | Rust | `u32` seed; `Iterator::scan` cumulative table, `Iterator::position` lookup; `[u8; 61]` line into `BufWriter` over locked stdout |
 | C++ | `std::uint32_t` seed; `std::ranges::find_if` lookup; `std::array<char, 61>` lines via `std::cout.write` with `sync_with_stdio(false)` |
+| C | `uint32_t` seed; linear scan over a fixed `double` array; ALU lines with at most two `fwrite`s; `setvbuf` 64 KiB |
 | Assembly | x86-64 NASM, raw `write`/`exit` syscalls; reciprocal-multiplication modulo, `cvtsi2sd`/`divsd`/`comisd`; cumulative table summed with `addsd`; 64 KiB buffer |
+| Zig | `u32` seed; cumulative `f64` tables summed at comptime (same rounding as at run time); linear scan; ALU lines sliced from `alu ++ alu[0..60]` |
+| V | `u32` seed; linear scan over a cumulative `[]f64`; ALU lines are slices of `alu + alu[..60]`; 64 KiB `strings.Builder` chunks |
+| Java | `int` seed, `(double) seed / IM`; linear scan over a cumulative `double[]`; byte lines through a 64 KiB `BufferedOutputStream` |
+| Haskell | `Int` seed threaded through a strict `IO` loop; cumulative `UArray Int Double` via `scanl1`; lines from `ByteString.unfoldrN` (one step per symbol) |
 | Python | generator function as the LCG; `itertools.accumulate` + `bisect.bisect_right`; one list comprehension per line into `sys.stdout.buffer.writelines` |
 | JavaScript | plain Numbers (exact below 2^53); `Float64Array` linear scan; `Uint8Array` lines copied into 64 KiB `Buffer` chunks; awaits `drain` on back-pressure |

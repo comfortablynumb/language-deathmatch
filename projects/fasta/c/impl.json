@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "uint32_t generator state: seed * 3877 + 29573 stays below 2^30, so no overflow; (double)seed / im is a plain IEEE division.",
+    "Linear scan over a fixed-size cumulative double array; ALU lines are written with at most two fwrite calls when they wrap.",
+    "Random lines are built in a char[61] and written with fwrite to stdout, fully buffered by setvbuf with a 64 KiB buffer.",
+    "gcc -std=c23 -O2, statically linked and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.c", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

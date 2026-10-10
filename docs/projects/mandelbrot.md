@@ -7,7 +7,7 @@
 | Level | 3 — Medium |
 | Kind | `cli` |
 | Tags | `cpu-bound`, `floating-point`, `bit-packing`, `binary-output`, `stdout` |
-| Languages | Go, Rust, C++, Assembly, Python, JavaScript |
+| Languages | Go, Rust, C++, C, Assembly, Zig, V, Java, Haskell, Python, JavaScript |
 
 ## Goal
 
@@ -99,6 +99,11 @@ The output is binary, so every successful case is checked by `sha256`.
 | Go | `float64` with `float64(…)` around each product (the Go spec may fuse `x*y + z` otherwise); reused row slice; `bufio.Writer` 64 KiB |
 | Rust | `f64` (rustc never contracts into FMA); reused `Vec<u8>` row; `BufWriter` over locked stdout; explicit digit check (Rust's parser accepts `+`) |
 | C++ | `double` with `-ffp-contract=off`; `std::from_chars` parsing; `std::ostream::write` with `sync_with_stdio(false)` |
+| C | `double` with `-ffp-contract=off`; reused stack row written with `fwrite`; `setvbuf` 64 KiB |
 | Assembly | x86-64 NASM, SSE2 scalar doubles, raw `write`/`exit` syscalls; `in_set` answers in the carry flag, `adc` packs it; 64 KiB buffer |
+| Zig | `f64` in the spec's order; default strict float mode never contracts to FMA; reused stack row; 64 KiB buffered writer |
+| V | `f64` in the spec's order, emitted to C as written; `-cflags -ffp-contract=off`, no `-march`; reused `[]u8` row |
+| Java | Plain `double` in the spec's order (Java never contracts to FMA); raw byte rows through a 64 KiB `BufferedOutputStream` |
+| Haskell | Unboxed `Double` loop in the spec's order (GHC never emits FMA); the native code generator's register copies make it ~2× slower than GCC/LLVM output |
 | Python | One `bytearray` per row written to `sys.stdout.buffer` |
 | JavaScript | Whole rows packed into a fresh ~64 KiB `Buffer` per chunk; awaits `drain` on back-pressure |

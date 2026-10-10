@@ -1,0 +1,11 @@
+{
+  "notes": [
+    "f64 arithmetic in the spec's exact order: V emits the expressions to C as written, and -ffp-contract=off stops gcc from fusing a * b + c into an FMA (no -march flag, so the x86-64 baseline has none anyway).",
+    "Each row is packed into a reused []u8 (8 pixels per byte, MSB first) and appended to a 64 KiB strings.Builder written to os.stdout() per chunk.",
+    "v -prod (gcc -O3 -flto), statically linked against musl and stripped, running on a scratch image."
+  ],
+  "files": [
+    { "path": "main.v", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

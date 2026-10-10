@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "f64 arithmetic in the spec's exact order; Zig's default strict float mode never contracts a * b + c into an FMA (only @mulAdd or @setFloatMode(.optimized) would).",
+    "Each row is packed into a reused stack array and written to a 64 KiB std.Io.Writer over stdout.",
+    "Digits are checked explicitly because std.fmt.parseInt also accepts a leading sign and '_' digit separators.",
+    "zig build-exe -O ReleaseFast -fstrip -mcpu baseline: no libc, a static binary on a scratch image; baseline x86-64 like the other compiled languages (Zig otherwise targets the build host's CPU)."
+  ],
+  "files": [
+    { "path": "main.zig", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

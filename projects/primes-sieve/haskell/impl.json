@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "STUArray Int Word8 keeps one byte per flag; an STUArray of Bool would be bit-packed, which the rules forbid.",
+    "Crossing off and the outer loop are strict tail-recursive loops in ST over 64-bit Int indices, with the bounds-checked readArray/writeArray.",
+    "runSTUArray freezes the flags without copying; the scan is a foldl' over a record with strict fields (count, Word64 sum, largest).",
+    "ghc -O2 with the non-threaded RTS; fully static (glibc, GMP) and stripped, on a scratch image."
+  ],
+  "files": [
+    { "path": "Main.hs", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

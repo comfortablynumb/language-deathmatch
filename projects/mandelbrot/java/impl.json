@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "double arithmetic in the spec's exact order; Java evaluates left to right, rounds every operation (strict IEEE semantics since Java 17) and never contracts a * b + c into an FMA (only an explicit Math.fma would).",
+    "Each row is packed into a reused byte[] (8 pixels per byte, MSB first) and written as raw bytes to a 64 KiB BufferedOutputStream over FileDescriptor.out.",
+    "Digits are checked explicitly because Integer.parseInt also accepts a leading '+'.",
+    "javac --release 25, run with java -cp on the Temurin JRE with default JVM flags: the inner loop is JIT-compiled while it runs."
+  ],
+  "files": [
+    { "path": "Main.java", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

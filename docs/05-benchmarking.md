@@ -44,7 +44,14 @@ per-CPU approximations: a process touching less than a few hundred KiB can read 
 traces the child (`PTRACE_TRACEME` + `PTRACE_O_TRACEEXIT`), stops it right before it exits,
 with its address space still intact, and reads its exact RSS from `/proc/<pid>/smaps_rollup`
 (a page-table walk). Reported peak = `max(ru_maxrss, exact RSS at exit)`. Tracing adds
-overhead, so memory runs are never timed.
+overhead, so memory runs are never timed. The tracer also follows programs that re-execute
+themselves (`PTRACE_O_TRACEEXEC`): the JDK launcher on musl re-runs itself once to set
+`LD_LIBRARY_PATH`, and without that option the second `execve` would arrive as a plain `SIGTRAP`
+and kill the program.
+
+Managed runtimes keep their default settings (no GC or heap flags), so their peak memory reflects
+the runtime's own sizing as much as the program's data — e.g. the JVM sizes its initial heap from
+the host's RAM and switches from G1 to the Serial collector when pinned to one CPU (`-cpuset 1`).
 
 ## Metrics
 

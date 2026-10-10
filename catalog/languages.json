@@ -48,6 +48,22 @@
     }
   },
   {
+    "id": "c",
+    "name": "C",
+    "color": "#A8B9CC",
+    "kind": "compiled",
+    "toolchain": "GCC 16.2 (C23)",
+    "image": "gcc:16.2-trixie",
+    "website": "https://www.open-std.org/jtc1/sc22/wg14/",
+    "fighter": {
+      "glyph": "C",
+      "nickname": "The Elder",
+      "special": "Pointer Arithmetic",
+      "fatality": "Buffer Overflow",
+      "quote": "Everything you run was written in me."
+    }
+  },
+  {
     "id": "asm",
     "name": "Assembly",
     "color": "#9CA3AF",
@@ -61,6 +77,70 @@
       "special": "Raw Syscall",
       "fatality": "Segmentation Fault",
       "quote": "No runtime. No mercy."
+    }
+  },
+  {
+    "id": "zig",
+    "name": "Zig",
+    "color": "#F7A41D",
+    "kind": "compiled",
+    "toolchain": "Zig 0.16.0",
+    "image": "alpine:3.24",
+    "website": "https://ziglang.org",
+    "fighter": {
+      "glyph": "Zg",
+      "nickname": "The Ziguana",
+      "special": "Comptime Crush",
+      "fatality": "Unreachable",
+      "quote": "No hidden control flow. No hidden mercy."
+    }
+  },
+  {
+    "id": "v",
+    "name": "V",
+    "color": "#5D87BF",
+    "kind": "compiled",
+    "toolchain": "V 0.5.2",
+    "image": "alpine:3.24",
+    "website": "https://vlang.io",
+    "fighter": {
+      "glyph": "V",
+      "nickname": "The Speedrunner",
+      "special": "Instant Compile",
+      "fatality": "Autofree",
+      "quote": "Compiled before you blinked."
+    }
+  },
+  {
+    "id": "java",
+    "name": "Java",
+    "color": "#B07219",
+    "kind": "jit",
+    "toolchain": "OpenJDK 25 (Temurin)",
+    "image": "eclipse-temurin:25-jdk-alpine",
+    "website": "https://openjdk.org",
+    "fighter": {
+      "glyph": "Jv",
+      "nickname": "The Enterprise",
+      "special": "JIT Warmup Uppercut",
+      "fatality": "NullPointerException",
+      "quote": "Write once, win anywhere."
+    }
+  },
+  {
+    "id": "haskell",
+    "name": "Haskell",
+    "color": "#8F4E8B",
+    "kind": "compiled",
+    "toolchain": "GHC 9.14.1",
+    "image": "haskell:9.14",
+    "website": "https://www.haskell.org",
+    "fighter": {
+      "glyph": "Hs",
+      "nickname": "The Pure One",
+      "special": "Point-Free Strike",
+      "fatality": "Monadic Bind",
+      "quote": "Pure. Lazy. Undefeated."
     }
   },
   {

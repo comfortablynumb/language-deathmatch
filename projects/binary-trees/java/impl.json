@@ -1,0 +1,12 @@
+{
+  "notes": [
+    "Every node is its own record Node(Node left, Node right) on the garbage-collected heap; leaves have null children.",
+    "Default JVM ergonomics pick the collector: G1 with several CPUs, Serial GC when the container is pinned to one (-cpuset 1). Dropped trees die young; the long-lived tree is promoted.",
+    "Recursive build and check, JIT-compiled by C2; the few output lines go through a 64 KiB BufferedOutputStream over FileDescriptor.out.",
+    "Digits are checked explicitly because Integer.parseInt also accepts a leading '+'."
+  ],
+  "files": [
+    { "path": "Main.java", "role": "source" },
+    { "path": "Dockerfile", "role": "build" }
+  ]
+}

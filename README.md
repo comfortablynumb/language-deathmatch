@@ -7,7 +7,7 @@ byte and **benchmarks them in Docker**, then turns the numbers into an arcade fi
 language, pick a type of problem (an *arena*), and climb a tower where your language fights every
 other language one after another. Every blow is a real measurement; nothing is random.
 
-- Fighters: **Go, Rust, C++, Assembly (x86-64 NASM), Python, JavaScript (Node.js)**.
+- Fighters (11): **Go, Rust, C++, C, Assembly (x86-64 NASM), Zig, V, Java, Haskell, Python, JavaScript (Node.js)**.
 - Arenas (project categories): **Algorithms & Math** (Fibonacci, primes sieve), **Text & Data
   Processing** (fasta), **Data Structures & Memory** (binary trees), **Simulation & Graphics**
   (Mandelbrot); Concurrency, Web and Systems are locked until their project kinds exist.
@@ -35,9 +35,9 @@ JavaScript in The Floating Point, from the local run below):
 
 ```
 Round 2 · Memory: median peak memory of every benchmark case.
-Rust — Borrow Checker Slam · Mandelbrot › 200 × 200: 300 KiB vs 52.9 MiB (180× leaner) · critical · −100
+Rust — Borrow Checker Slam · Mandelbrot › 200 × 200: 304 KiB vs 52.7 MiB (177× leaner) · critical · −100
 Finish them!
-Rust — Lifetime Expired · Mandelbrot › 1000 × 1000: 272 KiB vs 54.9 MiB (207× leaner) · critical · −100
+Rust — Lifetime Expired · Mandelbrot › 1000 × 1000: 272 KiB vs 53.6 MiB (202× leaner) · critical · −100
 Fatality! Rust performs Lifetime Expired.
 Rust wins 2–0 against JavaScript by fatality.
 ```
@@ -100,22 +100,28 @@ Details: [docs/05-benchmarking.md](docs/05-benchmarking.md).
 
 | Arena | Projects | Round-robin standings (W–L) |
 |-------|----------|-----------------------------|
-| The Number Pit (Algorithms & Math) | Fibonacci, Primes Sieve | Assembly 5–0 · Rust 4–1 · Go 3–2 · C++ 2–3 · Python 1–4 · JavaScript 0–5 |
-| The Heap (Data Structures & Memory) | Binary Trees | Assembly 5–0 · C++ 4–1 · Go 3–2 · Rust 2–3 · Python 1–4 · JavaScript 0–5 |
-| The Scriptorium (Text & Data Processing) | Fasta | Assembly 5–0 · Rust 4–1 · C++ 3–2 · Go 2–3 · Python 1–4 · JavaScript 0–5 |
-| The Floating Point (Simulation & Graphics) | Mandelbrot | Rust 5–0 · C++ 4–1 · Assembly 3–2 · Go 2–3 · Python 1–4 · JavaScript 0–5 |
+| The Number Pit (Algorithms & Math) | Fibonacci, Primes Sieve | Assembly 10–0 · Zig 9–1 · Rust 8–2 · C 6–4 · V 6–4 · C++ 5–5 · Go 4–6 · Haskell 4–6 · Python 2–8 · JavaScript 1–9 · Java 0–10 |
+| The Heap (Data Structures & Memory) | Binary Trees | Assembly 10–0 · Haskell 8–2 · C 7–3 · C++ 6–4 · Zig 6–4 · V 6–4 · Rust 5–5 · Go 4–6 · Python 2–8 · JavaScript 1–9 · Java 0–10 |
+| The Scriptorium (Text & Data Processing) | Fasta | Assembly 10–0 · Rust 9–1 · Zig 8–2 · V 7–3 · C 6–4 · C++ 5–5 · Go 4–6 · Haskell 3–7 · Python 2–8 · Java 1–9 · JavaScript 0–10 |
+| The Floating Point (Simulation & Graphics) | Mandelbrot | Rust 10–0 · Zig 9–1 · V 8–2 · C 7–3 · C++ 6–4 · Assembly 5–5 · Go 4–6 · Haskell 3–7 · Python 2–8 · JavaScript 1–9 · Java 0–10 |
 
-Why JavaScript finishes last despite out-running Python on speed: it wins the Speed round but loses
-Memory (Node's ~45–55 MiB baseline vs CPython's ~9–17 MiB) and Brevity, so Python takes those
-matches 2–1. A selection of the medians behind the fights:
+Why Java and JavaScript finish below Python despite out-running it on speed: they win the Speed
+round but lose Memory (the JVM's and V8's default heaps vs CPython's ~9–25 MiB) and Brevity, so
+Python takes those matches 2–1. Median wall time of each project's large case:
 
-| Case | Assembly | Rust | C++ | Go | JavaScript | Python |
-|------|---------:|-----:|----:|---:|-----------:|-------:|
-| Binary trees, depth 16 | 28.6 ms | 329 ms | 130 ms | 299 ms | 192 ms | 876 ms |
-| Mandelbrot 1000 × 1000 | 38.6 ms | 33.9 ms | 34.4 ms | 36.1 ms | 69.6 ms | 1.70 s |
-| Fasta, N = 2.5 million | 221 ms | 232 ms | 229 ms | 235 ms | 363 ms | 2.06 s |
-| Primes sieve, N = 100 million | 562 ms | 496 ms | 546 ms | 516 ms | 597 ms | 1.69 s |
-| Fibonacci, N = 2 million | 49.4 ms | 124 ms | 58.2 ms | 28.2 ms | 138 ms | 307 ms |
+| Language | Binary trees (depth 16) | Mandelbrot (1000²) | Fasta (2.5 M) | Primes sieve (100 M) | Fibonacci (2 M) |
+|----------|------------------------:|-------------------:|--------------:|---------------------:|----------------:|
+| Go | 279 ms | 34.6 ms | 219 ms | 506 ms | 27.0 ms |
+| Rust | 305 ms | 32.5 ms | 215 ms | 489 ms | 118 ms |
+| C++ | 118 ms | 34.4 ms | 210 ms | 482 ms | 55.9 ms |
+| C | 92.8 ms | 33.6 ms | 212 ms | 477 ms | 67.9 ms |
+| Assembly | 28.8 ms | 37.0 ms | 207 ms | 520 ms | 46.6 ms |
+| Zig | 197 ms | 32.4 ms | 203 ms | 475 ms | 22.6 ms |
+| V | 119 ms | 33.4 ms | 275 ms | 1.01 s | 49.2 ms |
+| Java | 143 ms | 71.3 ms | 297 ms | 533 ms | 211 ms |
+| Haskell | 57.0 ms | 96.1 ms | 292 ms | 529 ms | 44.0 ms |
+| Python | 800 ms | 1.59 s | 1.92 s | 1.57 s | 283 ms |
+| JavaScript | 174 ms | 63.8 ms | 329 ms | 545 ms | 124 ms |
 
 The published site shows the CI numbers, which come from a different machine.
 

@@ -151,6 +151,7 @@ func TestHighlightFor(t *testing.T) {
 	cases := map[string]string{
 		"main.go": "go", "src/main.rs": "rust", "fibonacci.asm": "x86asm", "Dockerfile": "dockerfile",
 		"Cargo.toml": "ini", "main.py": "python", "main.js": "javascript", "go.mod": "plaintext", "x.zzz": "plaintext",
+		"Main.java": "java", "Main.hs": "haskell", "main.zig": "rust", "main.v": "rust", "main.c": "c",
 	}
 
 	for input, want := range cases {
